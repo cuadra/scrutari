@@ -1,0 +1,56 @@
+{
+  "name": "scrutari",
+  "version": "0.1.0",
+  "description": "A website crawler gathers URLs with the same origin on a site. Available as both a CLI tool and a JavaScript library.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/scrutari.js",
+      "require": "./dist/scrutari.cjs"
+    }
+  },
+  "main": "./dist/scrutari.cjs",
+  "module": "./dist/scrutari.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "scrutari": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "prepublishOnly": "npm run build",
+    "cliTest": "URL=[website] scruatari",
+    "importTest": "URL=[website] node tests/node.mjs",
+    "pipeTest": "URL=[website] scrutari | tests/stdin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuadra/scrutari.git"
+  },
+  "author": "Jose Cuadra (https://github.com/cuadra/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cuadra/scrutari/issues"
+  },
+  "homepage": "https://github.com/cuadra/scrutari#readme",
+  "keywords": [
+    "crawler",
+    "web crawler",
+    "website crawler",
+    "scrape",
+    "scraping",
+    "url gatherer",
+    "link gatherer",
+    "cli tool",
+    "javascript library",
+    "cli",
+    "sitemap"
+  ],
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
