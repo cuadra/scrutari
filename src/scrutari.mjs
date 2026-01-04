@@ -67,6 +67,9 @@ const processRobots = async (data, settings) => {
 };
 
 const processSitemap = async (sitemapUrl, settings) => {
+  if (settings.verbose) {
+    console.log(`Processing XML: ${pageUrl}`);
+  }
   let pages = [];
   const res = await fetch(sitemapUrl);
 
@@ -85,26 +88,30 @@ const processSitemap = async (sitemapUrl, settings) => {
 };
 
 const processPage = async (pageUrl, settings) => {
-  if (settings.verbose) {
-    console.log(`Processing page: ${pageUrl}`);
-  }
-  const res = await fetch(pageUrl);
-
-  if (!res.ok) {
-    return [];
-  }
-
-  const text = await res.text();
-  //Extract links from page
-  const linkRegex = /href="(http[s]?:\/\/[^"]+)"/g;
-  const links = text.matchAll(linkRegex);
   const pageLinks = [];
-  for (const link of links) {
-    const url = new URL(link[1]);
-    if (url.origin === settings.origin) {
-      //todo: ignore images and stylesheets
-      //todo:remove hashes and parameters
-      pageLinks.push(link[1]);
+  if (pageUrl.includes(".xml")) {
+    return await processSitemap(pageUrl, settings);
+  } else {
+    if (settings.verbose) {
+      console.log(`Processing page: ${pageUrl}`);
+    }
+    const res = await fetch(pageUrl);
+
+    if (!res.ok) {
+      return [];
+    }
+
+    const text = await res.text();
+    //Extract links from page
+    const linkRegex = /href="(http[s]?:\/\/[^"]+)"/g;
+    const links = text.matchAll(linkRegex);
+    for (const link of links) {
+      const url = new URL(link[1]);
+      if (url.origin === settings.origin) {
+        //todo: ignore images and stylesheets
+        //todo:remove hashes and parameters
+        pageLinks.push(link[1]);
+      }
     }
   }
 
