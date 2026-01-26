@@ -1,5 +1,6 @@
 > WIP !!!!
-# Scrutari
+# Scrutari [![NPM Version](https://img.shields.io/npm/v/scrutari)](https://www.npmjs.com/package/scrutari) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cuadra/scrutari/blob/main/README.md)
+
 > Scrutari is a Latin deponent verb meaning "to search," "probe," "examine carefully," or "investigate".
 
 A method to compile a list of URLs based on robot files, sitemaps, and page crawling.
